@@ -1,0 +1,20 @@
+
+.tab:selected
+{
+    -fx-background-color:#4bc565;
+}
+.tab-header-background {
+    -fx-background-color:transparent;
+}
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color:  transparent;
+}
+.tab > .pane {
+    -fx-background-color:red;
+    -fx-text-inner-color: red;
+ }
+.tab {
+
+    -fx-pref-height: 100
+
+}

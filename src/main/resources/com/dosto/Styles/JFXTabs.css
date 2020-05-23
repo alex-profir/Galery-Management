@@ -1,0 +1,4 @@
+.jfx-tab-pane .tab-selected-line {
+    -fx-background-color: #75bc1b;
+    -fx-pref-height: 4px;
+}

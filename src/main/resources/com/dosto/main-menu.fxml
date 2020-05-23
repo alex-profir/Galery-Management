@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;"
+            stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/10.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.MainMenuController">
+    <JFXTabPane fx:id="tabPane" prefHeight="538.0" prefWidth="683.0" side="LEFT">
+        <Tab fx:id="userTab">
+            <graphic>
+                <AnchorPane fx:id="userAnchor" prefHeight="85.0" prefWidth="54.0">
+                    <FontAwesomeIcon fill="WHITE" iconName="USER" layoutX="21.0" layoutY="20.0" rotate="90.0"
+                                     size="1.5em" text="" textAlignment="JUSTIFY"
+                                     wrappingWidth="20.199949264526367">
+                        <font>
+                            <Font name="System Bold" size="2.0"/>
+                        </font>
+                    </FontAwesomeIcon>
+                    <Label layoutX="9.0" layoutY="36.0" rotate="90.0" text="Users"/>
+                </AnchorPane>
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="254.0" prefWidth="564.0">
+                <fx:include source="users.fxml"/>
+            </AnchorPane>
+        </Tab>
+        <Tab>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" rotate="90.0" size="1.5em" wrappingWidth="23.20001220703125"/>
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="133.0"/>
+        </Tab>
+    </JFXTabPane>
+</AnchorPane>
