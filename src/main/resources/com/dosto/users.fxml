@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="538.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/10.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserListController">
+    <AnchorPane layoutX="75.0" layoutY="36.0" prefHeight="392.0" prefWidth="518.0" style="-fx-background-color: green;">
+        <TableView fx:id="userTable" layoutX="92.0" layoutY="56.0" prefHeight="279.0" prefWidth="320.0">
+            <columns>
+                <TableColumn fx:id="username" prefWidth="75.0" text="name"/>
+                <TableColumn fx:id="role" prefWidth="75.0" text="role"/>
+            </columns>
+        </TableView>
+    </AnchorPane>
+</AnchorPane>
