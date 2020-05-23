@@ -19,8 +19,8 @@ public class UserService {
     public static List<User> getUsers(){
         List<User> users = new ArrayList<>();
         JSONParser parser = new JSONParser();
-        String v = System.getProperty("user.dir");
-        try (Reader reader = new FileReader(v + "\\src\\main\\java\\com\\dosto\\data\\users.json")) {
+        String userDirectory = System.getProperty("user.dir");
+        try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\users.json")) {
             JSONArray array = (JSONArray) parser.parse(reader);
             Iterator<JSONObject> iterator = array.iterator();
             while(iterator.hasNext()){
