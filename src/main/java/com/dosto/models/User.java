@@ -10,6 +10,30 @@ public class User {
     private final String username;
     private final String password;
     private String role;
+    private String email;
+    private String lastName;
+    private String firstName;
+
+    public User(String username, String password, String role, String email, String lastName, String firstName) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
 
     public String getRole() {
         return role;
@@ -27,6 +51,9 @@ public class User {
         this.password= (String) object.get("password");
         this.username=(String) object.get("username");
         this.role = (String) object.get("role");
+        this.firstName=(String) object.get("firstName");
+        this.lastName=(String) object.get("lastName");
+        this.email=(String) object.get("email");
     }
 
     @Override

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="538.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/10.0.2"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserListController">
-    <AnchorPane layoutX="75.0" layoutY="36.0" prefHeight="392.0" prefWidth="518.0" style="-fx-background-color: green;">
-        <TableView fx:id="userTable" layoutX="92.0" layoutY="56.0" prefHeight="279.0" prefWidth="320.0">
+<AnchorPane prefHeight="538.0" prefWidth="648.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserListController">
+    <AnchorPane layoutX="65.0" layoutY="73.0" prefHeight="392.0" prefWidth="518.0" style="-fx-background-color: #121212;">
+      <JFXButton layoutX="194.0" layoutY="370.0" onAction="#onCreateUser" style="-fx-background-color: #4bc565;" text="create new user">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+        <TableView fx:id="userTable" layoutX="19.0" layoutY="61.0" prefHeight="279.0" prefWidth="482.0">
             <columns>
-                <TableColumn fx:id="username" prefWidth="75.0" text="name"/>
-                <TableColumn fx:id="role" prefWidth="75.0" text="role"/>
+                <TableColumn fx:id="username" prefWidth="75.0" text="name" />
+                <TableColumn fx:id="role" prefWidth="75.0" text="role" />
+            <TableColumn fx:id="firstName" prefWidth="75.0" text="First Name" />
+            <TableColumn fx:id="lastName" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="email" prefWidth="181.0" text="email" />
             </columns>
         </TableView>
     </AnchorPane>

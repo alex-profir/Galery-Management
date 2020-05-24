@@ -1,12 +1,1 @@
-[
-  {
-    "username": "admin",
-    "password": "YWRtaW4",
-    "role": "admin"
-  },
-  {
-    "username": "test",
-    "password": "MTIzNA",
-    "role": "user"
-  }
-]
+[{"firstName":"","lastName":"","password":"YWRtaW4","role":"admin","email":" ","username":"admin"},{"firstName":"Aurel ","lastName":"Radauti","password":"MTIzNA","role":"user","email":"raurel73@yahoo.com","username":"test"}]
