@@ -10,12 +10,14 @@ import com.dosto.models.User;
 import com.dosto.models.Coder;
 import com.dosto.services.UserService;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 
 public class LoginController {
     @FXML private TextField username;
     @FXML private TextField password;
+    @FXML private Label errorLabel;
     private List<User> users = UserService.getUsers();
     @FXML private void clickLogIn() throws  IOException{
         User formUser = new User(username.getText(),Coder.encode(password.getText()));
@@ -28,7 +30,7 @@ public class LoginController {
                 System.out.println("Login successful");
                 break;
             }else{
-                System.out.println("Login failed");
+                errorLabel.setText("Invalid password or username");
             }
         }
     }
