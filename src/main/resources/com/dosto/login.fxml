@@ -10,46 +10,44 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#clickLogIn" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;"
-            xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.dosto.LoginController">
+<AnchorPane onKeyPressed="#clickLogIn" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.LoginController">
    <Label layoutX="27.0" layoutY="125.0" prefHeight="18.0" prefWidth="113.0" text="Login" textFill="#4bc565">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </Label>
-   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="152.0" prefHeight="45.0" prefWidth="350.0"
-         style="-fx-border-color: #D3D3D3; -fx-border-radius: 5px;">
+   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="152.0" prefHeight="45.0" prefWidth="350.0" style="-fx-border-color: #D3D3D3; -fx-border-radius: 5px;">
       <FontAwesomeIcon fill="DARKGRAY" glyphStyle="-fx-fill:#BEBFC1" iconName="USER" size="2em" wrappingWidth="40.0">
          <HBox.margin>
-            <Insets left="10.0"/>
+            <Insets left="10.0" />
          </HBox.margin>
       </FontAwesomeIcon>
-      <JFXTextField fx:id="username" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0" promptText="Username"
-                    stylesheets="@Styles/TextFieldCustomStyle.css">
+      <JFXTextField fx:id="username" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0" promptText="Username" stylesheets="@Styles/TextFieldCustomStyle.css">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </JFXTextField>
    </HBox>
-   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="213.0" prefHeight="46.0" prefWidth="350.0"
-         style="-fx-border-color: #D3D3D3; -fx-border-radius: 5px;">
+   <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="213.0" prefHeight="46.0" prefWidth="350.0" style="-fx-border-color: #D3D3D3; -fx-border-radius: 5px;">
       <FontAwesomeIcon fill="DARKGRAY" iconName="LOCK" size="2em" wrappingWidth="40.0">
          <HBox.margin>
-            <Insets left="10.0"/>
+            <Insets left="10.0" />
          </HBox.margin>
       </FontAwesomeIcon>
-      <JFXPasswordField fx:id="password" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0"
-                        promptText="Password" stylesheets="@Styles/TextFieldCustomStyle.css">
+      <JFXPasswordField fx:id="password" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0" promptText="Password" stylesheets="@Styles/TextFieldCustomStyle.css">
          <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
          </font>
       </JFXPasswordField>
    </HBox>
-   <JFXButton layoutX="240.0" layoutY="267.0" onAction="#clickLogIn" prefHeight="46.0" prefWidth="125.0"
-              style="-fx-background-color: #4bc565;" text="Login">
+   <JFXButton layoutX="240.0" layoutY="267.0" onAction="#clickLogIn" prefHeight="46.0" prefWidth="125.0" style="-fx-background-color: #4bc565;" text="Login">
       <font>
-         <Font name="System Bold" size="18.0"/>
+         <Font name="System Bold" size="18.0" />
       </font>
    </JFXButton>
+   <Label fx:id="errorLabel" layoutX="20.0" layoutY="331.0" prefHeight="37.0" prefWidth="316.0" textFill="RED">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
 </AnchorPane>
