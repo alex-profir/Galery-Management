@@ -17,16 +17,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UserService {
+    @SuppressWarnings("unchecked")
     public static List<User> getUsers(){
         List<User> users = new ArrayList<>();
         JSONParser parser = new JSONParser();
         String userDirectory = System.getProperty("user.dir");
         try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\users.json")) {
             JSONArray array = (JSONArray) parser.parse(reader);
-            Iterator<JSONObject> iterator = array.iterator();
-            while(iterator.hasNext()){
-                JSONObject object = iterator.next();
-                User user= new User(object);
+            for (JSONObject object : (Iterable<JSONObject>) array) {
+                User user = new User(object);
                 users.add(user);
             }
         } catch (IOException | ParseException e) {
@@ -36,6 +35,7 @@ public class UserService {
         return users;
     }
 
+    @SuppressWarnings("unchecked")
     public static void addUser(User user){
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
