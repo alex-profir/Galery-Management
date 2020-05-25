@@ -15,9 +15,9 @@
       </font>
    </JFXButton>
    <ImageView fx:id="testImage" fitHeight="248.0" fitWidth="366.0" layoutX="197.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
-   <JFXTextField fx:id="name" layoutX="22.0" layoutY="39.0" promptText="name" />
-   <JFXTextArea fx:id="description" layoutX="22.0" layoutY="135.0" prefHeight="91.0" prefWidth="135.0" promptText="description" />
-   <JFXTextField fx:id="artist" layoutX="23.0" layoutY="88.0" promptText="artist" />
+   <JFXTextField fx:id="name" focusColor="#4bc565" layoutX="22.0" layoutY="39.0" promptText="name" />
+   <JFXTextArea fx:id="description" focusColor="#4bc565" layoutX="22.0" layoutY="135.0" prefHeight="91.0" prefWidth="135.0" promptText="description" />
+   <JFXTextField fx:id="artist" focusColor="#4bc565" layoutX="23.0" layoutY="88.0" promptText="artist" />
    <JFXButton layoutX="37.0" layoutY="327.0" onAction="#onSubmit" prefHeight="43.0" prefWidth="106.0" style="-fx-background-color: #4bc565;" text="Submit">
       <font>
          <Font name="System Bold" size="18.0" />

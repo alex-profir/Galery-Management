@@ -1,6 +1,7 @@
 package com.dosto;
 
 import com.dosto.models.ArtItem;
+import com.dosto.services.ArtItemService;
 import com.dosto.services.GlobalVars;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -35,20 +36,21 @@ public class AddArtItemDialogController {
             return;
         }
         if(name.getText().trim().length()==0) {
-            name.setText("Name length must be greater than 0");
+            errorLabel.setText("Name required");
             return;
         }
         if(artist.getText().trim().length()==0) {
-            name.setText("artist length must be greater than 0");
+            errorLabel.setText("Artist required");
             return;
         }
         if(description.getText().trim().length()==0) {
-            name.setText("description length must be greater than 0");
+            errorLabel.setText("Description required");
             return;
         }
-        ArtItem artItem = new ArtItem(name.getText(),artist.getText(),description.getText(),imageString);
-
-
+        ArtItem artItem = new ArtItem(name.getText(),artist.getText(),description.getText(),imageString,true);
+        ArtItemService.addArtItem(artItem);
+        appMainObservableList.add(artItem);
+        this.closeStage(event);
     }
     @FXML private void onUploadImage(ActionEvent event) {
         final FileChooser fileChooser = new FileChooser();
