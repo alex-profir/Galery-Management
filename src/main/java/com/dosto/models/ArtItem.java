@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
+import java.util.Objects;
 
 public class ArtItem {
     private final String name;
@@ -24,6 +25,24 @@ public class ArtItem {
         this.isPending=isPending;
         byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
+    }
+
+    public void setPending(boolean pending) {
+        isPending = pending;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArtItem artItem = (ArtItem) o;
+
+        if (!Objects.equals(name, artItem.name)) return false;
+        if (!Objects.equals(artist, artItem.artist)) return false;
+        if (!Objects.equals(description, artItem.description)) return false;
+        if (!Objects.equals(owner, artItem.owner)) return false;
+        return Objects.equals(encodedImageString, artItem.encodedImageString);
     }
 
     public boolean isPending() {

@@ -27,15 +27,15 @@ public class MainMenuController implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends Tab> observableValue, Tab oldTab, Tab newTab) {
                         System.out.println("Tab changed");
-                        if (newTab.getContent() != null) {
-                            try {
-                                System.out.println(newTab.equals((userTab)));
-                                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(("users" + ".fxml")));
-                                newTab.setContent(fxmlLoader.load());
-                            } catch (IOException e) {
-                                System.out.println(e.toString());
-                            }
-                        }
+//                        if (newTab.getContent() != null) {
+//                            try {
+//                                System.out.println(newTab.equals((userTab)));
+//                                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(("users" + ".fxml")));
+//                                newTab.setContent(fxmlLoader.load());
+//                            } catch (IOException e) {
+//                                System.out.println(e.toString());
+//                            }
+//                        }
                         tabPane.requestLayout();
                     }
                 }

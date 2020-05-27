@@ -13,5 +13,5 @@
       </font>
    </JFXButton>
    <TilePane fx:id="tilePane" layoutX="42.0" layoutY="24.0" prefHeight="402.0" prefWidth="702.0" />
-   <Pagination fx:id="pagination" layoutX="42.0" layoutY="506.0" maxPageIndicatorCount="2" prefHeight="64.0" prefWidth="466.0" />
+   <Pagination fx:id="pagination" layoutX="42.0" layoutY="506.0" maxPageIndicatorCount="5" pageCount="5" prefHeight="64.0" prefWidth="466.0" />
 </AnchorPane>

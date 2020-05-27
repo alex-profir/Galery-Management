@@ -2,7 +2,6 @@ package com.dosto;
 
 import com.dosto.models.ArtItem;
 import com.dosto.services.ArtItemService;
-import com.dosto.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -20,14 +22,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class PersonalGalleryController implements Initializable {
-    @FXML private TilePane tilePane;
-    private ObservableList<ArtItem> artItemList = FXCollections.observableArrayList(ArtItemService.getArtItems());
-    @FXML private void onAddArtItem() throws IOException{
+    @FXML
+    private TilePane tilePane;
+    @FXML
+    private Pagination pagination;
+    private final int pageSize = 6;
+    private ObservableList<ArtItem> artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
+
+    @FXML
+    private void onAddArtItem() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addArtItemDialog.fxml"));
         Parent parent = fxmlLoader.load();
         AddArtItemDialogController dialogController = fxmlLoader.getController();
@@ -38,27 +44,67 @@ public class PersonalGalleryController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
-        this.createImageView();
+        if ((artItemList.size() / 6) + 1 > 5) {
+            pagination.setMaxPageIndicatorCount(5);
+        } else {
+            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
+        }
+        pagination.setPageCount(artItemList.size() / 6 + 1);
+        this.createImageView(pagination.getCurrentPageIndex());
     }
-    public void createImageView(){
+
+    public void createImageView(int index) {
         tilePane.getChildren().clear();
-        for (ArtItem artItem : artItemList) {
-            ImageView imageView = new ImageView();
-            Image image = artItem.getImage();
-            imageView.setImage(image);
-            imageView.setFitHeight(180);
-            imageView.setFitWidth(180);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
-            VBox pageBox = new VBox();
-            pageBox.setPadding(new Insets(20,20,20,20));
-            pageBox.setSpacing(10);
-            pageBox.getChildren().add(imageView);
-            tilePane.getChildren().add(pageBox);
+        for (int i = index * pageSize; i < index * pageSize + pageSize; i++) {
+            try {
+                ArtItem artItem = artItemList.get(i);
+                VBox pane = new VBox();
+                Label status = new Label();
+                status.setStyle("-fx-background-color: #4bc565; -fx-text-inner-color: #a9a9a9;");
+                if (artItem.isPending()) {
+                    status.setText("PENDING");
+                } else {
+                    status.setText("In Gallery");
+                }
+                pane.getChildren().add(status);
+                ImageView imageView = new ImageView();
+                Image image = artItem.getImage();
+                imageView.setImage(image);
+                imageView.setFitHeight(180);
+                imageView.setFitWidth(180);
+                pane.getChildren().add(imageView);
+                Tooltip img = new Tooltip("Name: " + artItem.getName() + "\n" +
+                        "Artist: " + artItem.getArtist() + "\n" +
+                        "Description:" + artItem.getDescription());
+
+                Tooltip.install(imageView, img);
+                VBox pageBox = new VBox();
+                pageBox.setPadding(new Insets(20, 20, 20, 20));
+                pageBox.setSpacing(10);
+                pageBox.getChildren().add(pane);
+                tilePane.getChildren().add(pageBox);
+            } catch (IndexOutOfBoundsException e) {
+                e.getSuppressed();
+            }
+
         }
     }
+
+    public VBox createStuff(int index) {
+        createImageView(index);
+        return new VBox();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.createImageView();
+        this.createImageView(0);
+        System.out.println(artItemList.size() / 6);
+        if ((artItemList.size() / 6) + 1 > 5) {
+            pagination.setMaxPageIndicatorCount(5);
+        } else {
+            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
+        }
+        pagination.setPageCount(artItemList.size() / 6 + 1);
+        pagination.setPageFactory(this::createStuff);
     }
 }
