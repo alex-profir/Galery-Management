@@ -2,56 +2,31 @@ package com.dosto;
 
 import com.dosto.models.ArtItem;
 import com.dosto.services.ArtItemService;
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.layout.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PersonalGalleryController implements Initializable {
+public class AcceptArtItemsController implements Initializable {
     @FXML
     private TilePane tilePane;
     @FXML
     private Pagination pagination;
     private final int pageSize = 6;
-    private ObservableList<ArtItem> artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
-
-    @FXML
-    private void onAddArtItem() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addArtItemDialog.fxml"));
-        Parent parent = fxmlLoader.load();
-        AddArtItemDialogController dialogController = fxmlLoader.getController();
-        dialogController.setAppMainObservableList(artItemList);
-
-        Scene scene = new Scene(parent, 600, 400);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.showAndWait();
-        if ((artItemList.size() / 6) + 1 > 5) {
-            pagination.setMaxPageIndicatorCount(5);
-        } else {
-            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
-        }
-        pagination.setPageCount(artItemList.size() / 6 + 1);
-        this.createImageView(pagination.getCurrentPageIndex());
-    }
+    private ObservableList<ArtItem> artItemList = FXCollections.observableArrayList(ArtItemService.getPendingArtItems());
 
     public void createImageView(int index) {
         tilePane.getChildren().clear();
@@ -59,14 +34,42 @@ public class PersonalGalleryController implements Initializable {
             try {
                 ArtItem artItem = artItemList.get(i);
                 VBox pane = new VBox();
-                Label status = new Label();
-                status.setStyle("-fx-background-color: #4bc565; -fx-text-inner-color: #a9a9a9;");
-                if (artItem.isPending()) {
-                    status.setText("PENDING");
-                } else {
-                    status.setText("In Gallery");
-                }
-                pane.getChildren().add(status);
+                HBox root = new HBox();
+                root.setPadding(new Insets(10, 10, 10, 10));
+                JFXButton accept = new JFXButton("Accept");
+                final Pane spacer = new Pane();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                spacer.setMinSize(10,1);
+                JFXButton reject = new JFXButton("Reject");
+                reject.setStyle("-fx-background-color: #4bc565");
+                accept.setStyle("-fx-background-color: #4bc565");
+                root.getChildren().addAll(accept,spacer,reject);
+                int finalI = i;
+                accept.setOnAction(actionEvent -> {
+                        ArtItemService.acceptArtItem(artItem);
+                        artItemList.remove(artItem);
+                        if ((artItemList.size() / 6) + 1 > 5) {
+                            pagination.setMaxPageIndicatorCount(5);
+                        } else {
+                            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
+                        }
+                        pagination.setPageCount(artItemList.size() / 6 + 1);
+                        this.createImageView(pagination.getCurrentPageIndex());
+                });
+                reject.setOnAction(actionEvent -> {
+                    ArtItemService.deleteArtItem(artItem);
+                    artItemList.remove(artItem);
+                    System.out.println(finalI);
+                    if ((artItemList.size() / 6) + 1 > 5) {
+                        pagination.setMaxPageIndicatorCount(5);
+                    } else {
+                        pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
+                    }
+                    pagination.setPageCount(artItemList.size() / 6 + 1);
+                    this.createImageView(pagination.getCurrentPageIndex());
+
+                });
+                pane.getChildren().add(root);
                 ImageView imageView = new ImageView();
                 Image image = artItem.getImage();
                 imageView.setImage(image);
@@ -89,7 +92,6 @@ public class PersonalGalleryController implements Initializable {
 
         }
     }
-
     public VBox createStuff(int index) {
         createImageView(index);
         return new VBox();

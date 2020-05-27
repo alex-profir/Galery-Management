@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.dosto.App;
 import com.dosto.models.User;
 import com.dosto.models.Coder;
+import com.dosto.services.GlobalVars;
 import com.dosto.services.UserService;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,6 +24,7 @@ public class LoginController {
         User formUser = new User(username.getText(),Coder.encode(password.getText()));
         for (User user : users) {
             if(user.equals(formUser)){
+                GlobalVars.loggedUser = user;
                 if(user.getRole().equals("admin")){
                     App.setRoot("main-menu");
                 }
