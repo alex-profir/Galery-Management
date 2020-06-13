@@ -21,5 +21,15 @@
                 <fx:include source="personal-gallery.fxml" />
             </AnchorPane>
         </Tab>
+        <Tab>
+            <graphic>
+                <FontAwesomeIcon fill="WHITE" iconName="ARCHIVE" rotate="90.0" size="1.5em" />
+            </graphic>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                <fx:include source="users-gallery.fxml" />
+
+            </AnchorPane>
+        </Tab>
     </JFXTabPane>
 </AnchorPane>

@@ -34,6 +34,23 @@ public class ArtItemService {
         }
         return artItems;
     }
+    public static List<ArtItem> getAcceptedArtItems(){
+        List<ArtItem> artItems = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        String userDirectory = System.getProperty("user.dir");
+        try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\artItems.json")) {
+            JSONArray array = (JSONArray) parser.parse(reader);
+            for (JSONObject object : (Iterable<JSONObject>) array) {
+                ArtItem artItem = new ArtItem(object);
+                if(!artItem.isPending())
+                    artItems.add(artItem);
+            }
+        } catch (IOException | ParseException e) {
+            System.out.println("error getting artItems");
+            System.out.println(e.toString());
+        }
+        return artItems;
+    }
     @SuppressWarnings("unchecked")
     public static List<ArtItem> getPendingArtItems(){
         List<ArtItem> artItems = new ArrayList<>();
