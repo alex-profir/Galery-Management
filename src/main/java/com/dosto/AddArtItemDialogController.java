@@ -47,7 +47,7 @@ public class AddArtItemDialogController {
             errorLabel.setText("Description required");
             return;
         }
-        ArtItem artItem = new ArtItem(name.getText(),artist.getText(),description.getText(),imageString,true);
+        ArtItem artItem = new ArtItem(name.getText(),artist.getText(),description.getText(),imageString,ArtItem.pendingStatus);
         ArtItemService.addArtItem(artItem);
         appMainObservableList.add(artItem);
         this.closeStage(event);

@@ -1,5 +1,6 @@
 package com.dosto;
 
+import com.dosto.services.ArtItemService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        ArtItemService.setId();
         scene = new Scene(loadFXML("login"));
         stage.setScene(scene);
         stage.show();

@@ -1,9 +1,13 @@
 package com.dosto;
 
 import com.dosto.models.ArtItem;
+import com.dosto.models.Borrow;
 import com.dosto.services.ArtItemService;
+import com.dosto.services.BorrowService;
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,8 +19,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -52,27 +55,69 @@ public class PersonalGalleryController implements Initializable {
         pagination.setPageCount(artItemList.size() / 6 + 1);
         this.createImageView(pagination.getCurrentPageIndex());
     }
+    private void onReview(ActionEvent event,Borrow borrow) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("borrow.fxml"));
+        Parent parent = fxmlLoader.load();
+        BorrowArtItemController dialogController = fxmlLoader.getController();
 
+        dialogController.setBorrow(borrow);
+
+        Scene scene = new Scene(parent, 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
+        this.createImageView(0);
+    }
     public void createImageView(int index) {
         tilePane.getChildren().clear();
         for (int i = index * pageSize; i < index * pageSize + pageSize; i++) {
             try {
                 ArtItem artItem = artItemList.get(i);
                 VBox pane = new VBox();
+                HBox root = new HBox();
+                root.setPadding(new Insets(10, 10, 10, 10));
+                JFXButton review = new JFXButton();
+                review.setStyle("-fx-background-color: #121212");
                 Label status = new Label();
                 status.setStyle("-fx-background-color: #4bc565; -fx-text-inner-color: #a9a9a9;");
-                if (artItem.isPending()) {
+                if (artItem.getStatus().equals(ArtItem.pendingStatus)) {
                     status.setText("PENDING");
-                } else {
+                } else  if (artItem.getStatus().equals(ArtItem.borrowedStatus)){
+                    status.setText("BORROWED");
+                } else if(artItem.getStatus().equals(ArtItem.pendingBorrow)) {
+
+
+                    status.setText("THIS ITEM IS REQUESTED");
+                    review.setText("Review");
+                    review.setStyle("-fx-background-color: #4bc565");
+                    Borrow borrow = BorrowService.getBorrowByArtItem(artItem);
+                    review.setOnAction(actionEvent -> {
+                        try {
+                            this.onReview(actionEvent,borrow);
+                        } catch (IOException e) {
+                            System.out.println("error");
+                        }
+                    });
+                    pane.getChildren().add(review);
+                }else {
                     status.setText("In Gallery");
                 }
-                pane.getChildren().add(status);
+
+                final Pane spacer = new Pane();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                root.getChildren().addAll(review,spacer);
+                pane.getChildren().addAll(root,status);
+
                 ImageView imageView = new ImageView();
                 Image image = artItem.getImage();
                 imageView.setImage(image);
                 imageView.setFitHeight(180);
                 imageView.setFitWidth(180);
                 pane.getChildren().add(imageView);
+
                 Tooltip img = new Tooltip("Name: " + artItem.getName() + "\n" +
                         "Artist: " + artItem.getArtist() + "\n" +
                         "Description:" + artItem.getDescription());

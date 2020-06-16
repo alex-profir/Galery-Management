@@ -22,13 +22,14 @@ public class ArtItem {
     private Image image;
     private String status;
     private Long id;
-    public ArtItem(String name, String artist, String description, String encodedImageString, String isPending) {
+
+    public ArtItem(String name, String artist, String description, String encodedImageString, String status) {
         this.name = name;
         this.artist = artist;
         this.description = description;
         this.encodedImageString = encodedImageString;
         this.owner= GlobalVars.loggedUser.getUsername();
-        this.status =isPending;
+        this.status =status;
         byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
     }
