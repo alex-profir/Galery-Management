@@ -39,6 +39,7 @@ public class BorrowService {
             System.out.println("Error writing borrow");
         }
     }
+    @SuppressWarnings("unchecked")
     public static void deleteBorrow(Borrow borrow){
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
@@ -59,6 +60,7 @@ public class BorrowService {
             System.out.println("Error deleting borrow");
         }
     }
+    @SuppressWarnings("unchecked")
     public static void rejectBorrow(Borrow borrow){
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
@@ -83,6 +85,7 @@ public class BorrowService {
         }
         deleteBorrow(borrow);
     }
+    @SuppressWarnings("unchecked")
     public static void updateBorrow(Borrow borrow,List<ArtItem> artItems){
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
@@ -110,6 +113,7 @@ public class BorrowService {
         deleteBorrow(borrow);
 
     }
+    @SuppressWarnings("unchecked")
     public static Borrow getBorrowByArtItem(ArtItem artItem){
         Borrow returnBorrow= new Borrow();
         List<ArtItem> artItems = new ArrayList<>();
