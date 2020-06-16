@@ -14,7 +14,8 @@
     -fx-text-inner-color: red;
  }
 .tab {
-
-    -fx-pref-height: 100
-
+    -fx-pref-height: 150;
+}
+.tab *.tab-label {
+    -fx-rotate: 90;
 }

@@ -5,17 +5,17 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserMenuController">
-    <JFXTabPane fx:id="tabPane" prefHeight="600.0" prefWidth="900.0" side="LEFT">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserMenuController">
+    <JFXTabPane fx:id="tabPane" prefHeight="700.0" prefWidth="900.0" side="LEFT">
         <Tab>
             <graphic>
-                <FontAwesomeIcon fill="WHITE" rotate="90.0" size="1.5em" wrappingWidth="23.20001220703125" />
+                <FontAwesomeIcon fill="WHITE" size="1.5em" wrappingWidth="23.20001220703125" />
             </graphic>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="133.0" />
         </Tab>
         <Tab>
             <graphic>
-                <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" rotate="90.0" size="1.5em" />
+                <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" size="1.5em" />
             </graphic>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <fx:include source="personal-gallery.fxml" />
@@ -23,7 +23,7 @@
         </Tab>
         <Tab>
             <graphic>
-                <FontAwesomeIcon fill="WHITE" iconName="ARCHIVE" rotate="90.0" size="1.5em" />
+                <FontAwesomeIcon fill="WHITE" iconName="ARCHIVE" size="1.5em" />
             </graphic>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 

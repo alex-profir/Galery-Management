@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#clickLogIn" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.LoginController">
+<AnchorPane onKeyPressed="#clickLogIn" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.LoginController">
    <Label layoutX="27.0" layoutY="125.0" prefHeight="18.0" prefWidth="113.0" text="Login" textFill="#4bc565">
       <font>
          <Font name="System Bold" size="18.0" />
@@ -22,7 +22,7 @@
             <Insets left="10.0" />
          </HBox.margin>
       </FontAwesomeIcon>
-      <JFXTextField fx:id="username" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0" promptText="Username" stylesheets="@Styles/TextFieldCustomStyle.css">
+      <JFXTextField fx:id="username" focusColor="#4bc565" prefHeight="30.0" prefWidth="283.0" promptText="Username ( or gallery name ) " stylesheets="@Styles/TextFieldCustomStyle.css">
          <font>
             <Font size="14.0" />
          </font>
