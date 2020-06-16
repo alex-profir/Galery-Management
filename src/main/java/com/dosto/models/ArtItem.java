@@ -9,26 +9,33 @@ import java.util.Base64;
 import java.util.Objects;
 
 public class ArtItem {
+    public static String pendingStatus = "PENDING";
+    public static String pendingBorrow = "PENDING_BORROW";
+    public static String borrowedStatus = "BORROWED";
+    public static String inGalleryStatus = "IN_GALLERY";
+
     private final String name;
     private final String artist;
     private final String description;
     private final String owner;
     private String encodedImageString;
     private Image image;
-    private boolean isPending;
-    public ArtItem(String name, String artist, String description,String encodedImageString,boolean isPending) {
+    private String status;
+    private Long id;
+
+    public ArtItem(String name, String artist, String description, String encodedImageString, String status) {
         this.name = name;
         this.artist = artist;
         this.description = description;
         this.encodedImageString = encodedImageString;
         this.owner= GlobalVars.loggedUser.getUsername();
-        this.isPending=isPending;
+        this.status =status;
         byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
     }
 
-    public void setPending(boolean pending) {
-        isPending = pending;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -45,8 +52,10 @@ public class ArtItem {
         return Objects.equals(encodedImageString, artItem.encodedImageString);
     }
 
-    public boolean isPending() {
-        return isPending;
+
+
+    public String getStatus() {
+        return status;
     }
     public ArtItem(JSONObject object) {
         this.name = (String)object.get("name");
@@ -54,10 +63,20 @@ public class ArtItem {
         this.description=(String)object.get("description");
         this.owner=(String)object.get("owner");
         this.encodedImageString =(String)object.get("image");
-        this.isPending=(Boolean) object.get("isPending") ;
+        this.status =(String) object.get("status") ;
+        this.id=(Long) object.get("id");
         byte[] decodedBytes = Base64.getDecoder().decode(this.encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getOwner() {
         return owner;
     }
@@ -80,5 +99,9 @@ public class ArtItem {
 
     public Image getImage() {
         return image;
+    }
+
+    public String toString(){
+        return this.name;
     }
 }

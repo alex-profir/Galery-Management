@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="603.0" prefWidth="764.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.PersonalGalleryController">
-   <JFXButton layoutX="603.0" layoutY="524.0" onAction="#onAddArtItem" prefHeight="46.0" prefWidth="124.0" style="-fx-background-color: #4bc565;" text="Add art Item">
+<AnchorPane prefHeight="700.0" prefWidth="764.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.PersonalGalleryController">
+   <JFXButton layoutX="603.0" layoutY="615.0" onAction="#onAddArtItem" prefHeight="46.0" prefWidth="124.0" style="-fx-background-color: #4bc565;" text="Add art Item">
       <font>
          <Font name="System Bold" size="14.0" />
       </font>
    </JFXButton>
    <TilePane fx:id="tilePane" layoutX="42.0" layoutY="24.0" prefHeight="402.0" prefWidth="702.0" />
-   <Pagination fx:id="pagination" layoutX="42.0" layoutY="506.0" maxPageIndicatorCount="5" pageCount="5" prefHeight="64.0" prefWidth="466.0" />
+   <Pagination fx:id="pagination" layoutX="42.0" layoutY="606.0" maxPageIndicatorCount="5" pageCount="5" prefHeight="64.0" prefWidth="466.0" />
 </AnchorPane>
