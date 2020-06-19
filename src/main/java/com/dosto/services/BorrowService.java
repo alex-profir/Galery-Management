@@ -27,6 +27,7 @@ public class BorrowService {
 
         borrowObject.put("creator",creator);
         borrowObject.put("artItems",idList);
+        borrowObject.put("status",Borrow.pendingStatus);
         ArtItemService.borrowArtItems(artItemList);
         try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\borrows.json")) {
             JSONArray array = (JSONArray) parser.parse(reader);
@@ -60,6 +61,29 @@ public class BorrowService {
             System.out.println("Error deleting borrow");
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public static void acceptBorrow(Borrow borrow) {
+        String userDirectory = System.getProperty("user.dir");
+        JSONParser parser = new JSONParser();
+        try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\borrows.json")) {
+            JSONArray array = (JSONArray) parser.parse(reader);
+            Iterator itr = array.iterator();
+            while(itr.hasNext()){
+                JSONObject next = (JSONObject) itr.next();
+                Borrow item = new Borrow(next);
+                if(item.equals(borrow)) {
+                    next.put("status", Borrow.borrowedStatus);
+                }
+            }
+            FileWriter file = new FileWriter(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\borrows.json");
+            file.write(array.toJSONString());
+            file.flush();
+        }
+        catch (IOException | ParseException err) {
+            System.out.println("Error deleting borrow");
+        }
+    }
     @SuppressWarnings("unchecked")
     public static void rejectBorrow(Borrow borrow){
         String userDirectory = System.getProperty("user.dir");
@@ -81,13 +105,16 @@ public class BorrowService {
             file.flush();
         }
         catch (IOException | ParseException err){
-            System.out.println("Error writing artItem");
+            System.out.println("Error rejecting borrow");
         }
         deleteBorrow(borrow);
     }
+
+
     @SuppressWarnings("unchecked")
     public static void updateBorrow(Borrow borrow,List<ArtItem> artItems){
         String userDirectory = System.getProperty("user.dir");
+
         JSONParser parser = new JSONParser();
         List<Long> idList = artItems.stream().map(artItem -> artItem.getId()).collect(Collectors.toList());
 
@@ -108,15 +135,15 @@ public class BorrowService {
             file.flush();
         }
         catch (IOException | ParseException err){
-            System.out.println("Error writing artItem");
+            System.out.println("Error updating borrow");
         }
-        deleteBorrow(borrow);
+
+        acceptBorrow(borrow);
 
     }
     @SuppressWarnings("unchecked")
     public static Borrow getBorrowByArtItem(ArtItem artItem){
         Borrow returnBorrow= new Borrow();
-        List<ArtItem> artItems = new ArrayList<>();
 
         JSONParser parser = new JSONParser();
         String userDirectory = System.getProperty("user.dir");

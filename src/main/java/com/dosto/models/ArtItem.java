@@ -9,10 +9,10 @@ import java.util.Base64;
 import java.util.Objects;
 
 public class ArtItem {
-    public static String pendingStatus = "PENDING";
-    public static String pendingBorrow = "PENDING_BORROW";
-    public static String borrowedStatus = "BORROWED";
-    public static String inGalleryStatus = "IN_GALLERY";
+    public static final String pendingStatus = "PENDING";
+    public static final String pendingBorrow = "PENDING_BORROW";
+    public static final String borrowedStatus = "BORROWED";
+    public static final String inGalleryStatus = "IN_GALLERY";
 
     private final String name;
     private final String artist;

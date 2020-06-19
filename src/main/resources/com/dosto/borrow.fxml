@@ -18,7 +18,7 @@
          </children>
       </AnchorPane>
       <JFXComboBox fx:id="userCombo" layoutX="421.0" layoutY="28.0" prefHeight="26.0" prefWidth="130.0" />
-      <JFXButton layoutX="81.0" layoutY="303.0" onAction="#onSubmit" style="-fx-background-color: #4bc565;" text="Submit" />
+      <JFXButton fx:id="submitButton" layoutX="81.0" layoutY="303.0" onAction="#onSubmit" style="-fx-background-color: #4bc565;" text="Submit" />
       <Text fx:id="requestedBy" fill="WHITE" layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.33673095703125" />
       <JFXButton fx:id="rejectButton" disable="true" layoutX="167.0" layoutY="303.0" onAction="#onReject" style="-fx-background-color: #4bc565;" text="Reject" visible="false" />
    </children>
