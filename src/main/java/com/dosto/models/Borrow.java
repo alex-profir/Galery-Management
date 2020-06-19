@@ -8,7 +8,13 @@ import java.io.ByteArrayInputStream;
 import java.util.*;
 
 public class Borrow {
+    public static final String pendingStatus = "PENDING";
+    public static final String borrowedStatus = "BORROWED";
+    public static final String returnedStatus = "RETURNED";
+
+
     private String creator;
+    private String status;
     private List<Long> artItems = new ArrayList<>();
 
     public Borrow(){
