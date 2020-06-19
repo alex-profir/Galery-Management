@@ -42,6 +42,7 @@ public class BorrowArtItemController implements Initializable {
     @FXML private ComboBox<ComboBoxItemWrap<ArtItem>> itemsCombo;
     @FXML private Text requestedBy;
     @FXML private JFXButton rejectButton;
+    @FXML private JFXButton submitButton;
 
     private Borrow borrow;
     private final ObservableList<User> users = FXCollections.observableArrayList(UserService.getUsers());
@@ -72,6 +73,7 @@ public class BorrowArtItemController implements Initializable {
 
         rejectButton.setVisible(true);
         rejectButton.setDisable(false);
+        submitButton.setText("Accept");
         // set default user
         userCombo.setValue(GlobalVars.loggedUser.getUsername());
         userCombo.setDisable(true);
