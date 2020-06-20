@@ -1,6 +1,7 @@
 package com.dosto.services;
 
 import com.dosto.App;
+import com.dosto.models.ArtItem;
 import com.dosto.models.Coder;
 import com.dosto.models.User;
 import org.json.simple.JSONArray;
@@ -32,8 +33,32 @@ public class UserService {
             System.out.println("error getting users");
             System.out.println(e.toString());
         }
+
         return users;
     }
+    @SuppressWarnings("unchecked")
+    public static void deleteUser(User user) {
+        JSONParser parser = new JSONParser();
+        String userDirectory = System.getProperty("user.dir");
+        try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\users.json")) {
+            JSONArray array = (JSONArray) parser.parse(reader);
+
+            Iterator itr = array.iterator();
+            while(itr.hasNext()){
+                User item = new User((JSONObject) itr.next());
+                if(item.equals(user)){
+                    itr.remove();
+                }
+            }
+            FileWriter file = new FileWriter(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\users.json");
+            file.write(array.toJSONString());
+            file.flush();
+        } catch (IOException | ParseException e) {
+            System.out.println("error getting users");
+            System.out.println(e.toString());
+        }
+    }
+
 
     @SuppressWarnings("unchecked")
     public static void addUser(User user){

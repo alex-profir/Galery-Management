@@ -24,9 +24,10 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPane.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<>() {
+                new ChangeListener() {
                     @Override
-                    public void changed(ObservableValue<? extends Tab> observableValue, Tab oldTab, Tab newTab) {
+                    public void changed(ObservableValue observableValue, Object oldTab, Object tab) {
+                        Tab newTab = (Tab) tab;
                         if (newTab.getContent() != null) {
                             try {
 //                                System.out.println(newTab.equals((userTab)));
@@ -45,6 +46,7 @@ public class MainMenuController implements Initializable {
                         }
                         tabPane.requestLayout();
                     }
+
                 }
         );
     }

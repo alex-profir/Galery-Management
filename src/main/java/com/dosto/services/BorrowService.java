@@ -175,7 +175,7 @@ public class BorrowService {
     }
     @SuppressWarnings("unchecked")
     public static Borrow getBorrowByArtItem(ArtItem artItem){
-        Borrow returnBorrow= new Borrow();
+        Borrow returnBorrow = null;
 
         JSONParser parser = new JSONParser();
         String userDirectory = System.getProperty("user.dir");

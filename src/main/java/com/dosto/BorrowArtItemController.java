@@ -143,10 +143,13 @@ public class BorrowArtItemController implements Initializable {
         });
 
         itemsCombo.setCellFactory(c -> {
-            ListCell<ComboBoxItemWrap<ArtItem>> cell = new ListCell<>(){
+            ListCell<ComboBoxItemWrap<ArtItem>> cell = new ListCell(){
                 @Override
-                protected void updateItem(ComboBoxItemWrap<ArtItem> item, boolean empty) {
-                    super.updateItem(item, empty);
+                protected void updateItem(Object obj, boolean empty) {
+
+                    super.updateItem(obj, empty);
+                    ComboBoxItemWrap<ArtItem> item = (ComboBoxItemWrap<ArtItem>) obj;
+
                     if (!empty) {
                         VBox box = new VBox();
                         final CheckBox cb = new CheckBox(item.toString());
@@ -160,6 +163,7 @@ public class BorrowArtItemController implements Initializable {
                         setGraphic(box);
                     }
                 }
+
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
