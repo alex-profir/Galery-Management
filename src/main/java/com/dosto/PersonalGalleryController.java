@@ -49,6 +49,9 @@ public class PersonalGalleryController implements Initializable {
         stage.showAndWait();
         pagination.setMaxPageIndicatorCount(Math.min((artItemList.size() / 6) + 1, 5));
         pagination.setPageCount(artItemList.size() / 6 + 1);
+
+
+        artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
         this.createImageView(pagination.getCurrentPageIndex());
     }
     private void onReview(ActionEvent event,Borrow borrow) throws IOException {
