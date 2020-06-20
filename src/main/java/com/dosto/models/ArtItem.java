@@ -29,10 +29,16 @@ public class ArtItem {
         this.artist = artist;
         this.description = description;
         this.encodedImageString = encodedImageString;
-        this.owner= GlobalVars.loggedUser.getUsername();
+        if(GlobalVars.loggedUser!= null){
+            this.owner= GlobalVars.loggedUser.getUsername();
+        } else {
+            this.owner="";
+        }
         this.status =status;
-        byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
-        this.image=new Image(new ByteArrayInputStream(decodedBytes));
+        if(encodedImageString != null){
+            byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
+            this.image=new Image(new ByteArrayInputStream(decodedBytes));
+        }
     }
 
     public String getOriginalOwner() {
