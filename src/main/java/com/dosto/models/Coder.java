@@ -10,5 +10,3 @@ public class Coder {
         return new String(Base64.getEncoder().withoutPadding().encode(text.getBytes()));
     }
 }
-//System.out.println(Base64.getEncoder().withoutPadding().encodeToString("1234".getBytes()));
-//System.out.println(new String (Base64.getDecoder().decode(user.getPassword())));

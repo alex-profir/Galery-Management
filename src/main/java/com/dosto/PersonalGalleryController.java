@@ -47,11 +47,7 @@ public class PersonalGalleryController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
-        if ((artItemList.size() / 6) + 1 > 5) {
-            pagination.setMaxPageIndicatorCount(5);
-        } else {
-            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
-        }
+        pagination.setMaxPageIndicatorCount(Math.min((artItemList.size() / 6) + 1, 5));
         pagination.setPageCount(artItemList.size() / 6 + 1);
         this.createImageView(pagination.getCurrentPageIndex());
     }
@@ -88,7 +84,7 @@ public class PersonalGalleryController implements Initializable {
         artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
         this.createImageView(0);
     }
-    public void createImageView(int index) {
+    private void createImageView(int index) {
         tilePane.getChildren().clear();
         for (int i = index * pageSize; i < index * pageSize + pageSize; i++) {
             try {
@@ -103,37 +99,42 @@ public class PersonalGalleryController implements Initializable {
                 review.setStyle("-fx-background-color: #121212");
                 Label status = new Label();
                 status.setStyle("-fx-background-color: #4bc565; -fx-text-inner-color: #a9a9a9;");
-                if (artItem.getStatus().equals(ArtItem.pendingStatus)) {
-                    status.setText("PENDING");
-                } else  if (artItem.getStatus().equals(ArtItem.borrowedStatus)){
-                    status.setText("BORROWED");
+                switch (artItem.getStatus()) {
+                    case ArtItem.pendingStatus:
+                        status.setText("PENDING");
+                        break;
+                    case ArtItem.borrowedStatus:
+                        status.setText("BORROWED");
 
-                    returnButton.setText("Return Items");
-                    returnButton.setStyle("-fx-background-color: #4bc565");
-                    returnButton.setOnAction(actionEvent -> {
-                        try {
-                            this.onReturn(borrow);
-                        } catch (IOException e) {
-                            System.out.println("error");
-                        }
-                    });
-                    pane.getChildren().add(returnButton);
-                } else if(artItem.getStatus().equals(ArtItem.pendingBorrow)) {
+                        returnButton.setText("Return Items");
+                        returnButton.setStyle("-fx-background-color: #4bc565");
+                        returnButton.setOnAction(actionEvent -> {
+                            try {
+                                this.onReturn(borrow);
+                            } catch (IOException e) {
+                                System.out.println("error");
+                            }
+                        });
+                        pane.getChildren().add(returnButton);
+                        break;
+                    case ArtItem.pendingBorrow:
 
 
-                    status.setText("THIS ITEM IS REQUESTED");
-                    review.setText("Review");
-                    review.setStyle("-fx-background-color: #4bc565");
-                    review.setOnAction(actionEvent -> {
-                        try {
-                            this.onReview(actionEvent,borrow);
-                        } catch (IOException e) {
-                            System.out.println("error");
-                        }
-                    });
-                    pane.getChildren().add(review);
-                }else {
-                    status.setText("In Gallery");
+                        status.setText("THIS ITEM IS REQUESTED");
+                        review.setText("Review");
+                        review.setStyle("-fx-background-color: #4bc565");
+                        review.setOnAction(actionEvent -> {
+                            try {
+                                this.onReview(actionEvent, borrow);
+                            } catch (IOException e) {
+                                System.out.println("error");
+                            }
+                        });
+                        pane.getChildren().add(review);
+                        break;
+                    default:
+                        status.setText("In Gallery");
+                        break;
                 }
 
                 final Pane spacer = new Pane();
@@ -165,7 +166,7 @@ public class PersonalGalleryController implements Initializable {
         }
     }
 
-    public VBox createStuff(int index) {
+    private VBox createStuff(int index) {
         createImageView(index);
         return new VBox();
     }
@@ -173,12 +174,7 @@ public class PersonalGalleryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.createImageView(0);
-        System.out.println(artItemList.size() / 6);
-        if ((artItemList.size() / 6) + 1 > 5) {
-            pagination.setMaxPageIndicatorCount(5);
-        } else {
-            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
-        }
+        pagination.setMaxPageIndicatorCount(Math.min((artItemList.size() / 6) + 1, 5));
         pagination.setPageCount(artItemList.size() / 6 + 1);
         pagination.setPageFactory(this::createStuff);
     }

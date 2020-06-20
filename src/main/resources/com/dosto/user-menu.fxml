@@ -5,14 +5,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserMenuController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.UserMenuController">
     <JFXTabPane fx:id="tabPane" prefHeight="700.0" prefWidth="900.0" side="LEFT">
-        <Tab>
-            <graphic>
-                <FontAwesomeIcon fill="WHITE" size="1.5em" wrappingWidth="23.20001220703125" />
-            </graphic>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="133.0" />
-        </Tab>
         <Tab fx:id="personalGallery">
             <graphic>
                 <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" size="1.5em" />

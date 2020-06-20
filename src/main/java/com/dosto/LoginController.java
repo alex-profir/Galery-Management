@@ -31,8 +31,6 @@ public class LoginController {
     @FXML private void clickLogIn() throws  IOException{
         User formUser = new User(username.getText(),Coder.encode(password.getText()));
         for (User user : users) {
-            System.out.println(user.getPassword());
-            System.out.println(formUser.getPassword());
             if(user.equals(formUser)){
                 GlobalVars.loggedUser = user;
                 if(user.getRole().equals("admin")){

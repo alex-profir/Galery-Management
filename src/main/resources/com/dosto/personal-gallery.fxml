@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="764.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.PersonalGalleryController">
+<AnchorPane prefHeight="700.0" prefWidth="764.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.PersonalGalleryController">
    <JFXButton layoutX="603.0" layoutY="615.0" onAction="#onAddArtItem" prefHeight="46.0" prefWidth="124.0" style="-fx-background-color: #4bc565;" text="Add art Item">
       <font>
          <Font name="System Bold" size="14.0" />
