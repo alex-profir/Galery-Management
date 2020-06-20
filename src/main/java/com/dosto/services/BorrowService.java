@@ -22,8 +22,7 @@ public class BorrowService {
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
         JSONObject borrowObject =new JSONObject();
-        Long[] ids = {};
-        List<Long> idList = artItemList.stream().map(artItem -> artItem.getId()).collect(Collectors.toList());
+        List<Long> idList = artItemList.stream().map(ArtItem::getId).collect(Collectors.toList());
 
         borrowObject.put("creator",creator);
         borrowObject.put("artItems",idList);
@@ -40,7 +39,7 @@ public class BorrowService {
             System.out.println("Error writing borrow");
         }
     }
-    @SuppressWarnings("unchecked")
+
     public static void deleteBorrow(Borrow borrow){
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
@@ -62,8 +61,42 @@ public class BorrowService {
         }
     }
 
+
     @SuppressWarnings("unchecked")
-    public static void acceptBorrow(Borrow borrow) {
+    public static void returnBorrowItems(Borrow borrow,List<ArtItem> artItems){
+        String userDirectory = System.getProperty("user.dir");
+
+        JSONParser parser = new JSONParser();
+        List<Long> idList = artItems.stream().map(ArtItem::getId).collect(Collectors.toList());
+
+        try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\artItems.json")) {
+            JSONArray array = (JSONArray) parser.parse(reader);
+            Iterator itr = array.iterator();
+            while(itr.hasNext()){
+                JSONObject next = (JSONObject) itr.next();
+                ArtItem item = new ArtItem(next);
+                String originalOwner = item.getOriginalOwner();
+                System.out.println(originalOwner);
+                if(idList.contains(item.getId())) {
+                    next.put("status", ArtItem.inGalleryStatus);
+                    next.put("owner", originalOwner);
+                    next.remove("originalOwner");
+                }
+            }
+            FileWriter file = new FileWriter(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\artItems.json");
+            file.write(array.toJSONString());
+            file.flush();
+        }
+        catch (IOException | ParseException err){
+            System.out.println("Error updating borrow");
+        }
+
+        updateBorrowStatus(borrow,Borrow.returnedStatus);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void updateBorrowStatus(Borrow borrow,String status) {
+        System.out.println("At update");
         String userDirectory = System.getProperty("user.dir");
         JSONParser parser = new JSONParser();
         try (Reader reader = new FileReader(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\borrows.json")) {
@@ -73,7 +106,7 @@ public class BorrowService {
                 JSONObject next = (JSONObject) itr.next();
                 Borrow item = new Borrow(next);
                 if(item.equals(borrow)) {
-                    next.put("status", Borrow.borrowedStatus);
+                    next.put("status", status);
                 }
             }
             FileWriter file = new FileWriter(userDirectory + "\\src\\main\\java\\com\\dosto\\data\\borrows.json");
@@ -81,7 +114,7 @@ public class BorrowService {
             file.flush();
         }
         catch (IOException | ParseException err) {
-            System.out.println("Error deleting borrow");
+            System.out.println("Error updating borrow");
         }
     }
     @SuppressWarnings("unchecked")
@@ -137,8 +170,7 @@ public class BorrowService {
         catch (IOException | ParseException err){
             System.out.println("Error updating borrow");
         }
-
-        acceptBorrow(borrow);
+        updateBorrowStatus(borrow,Borrow.borrowedStatus);
 
     }
     @SuppressWarnings("unchecked")
