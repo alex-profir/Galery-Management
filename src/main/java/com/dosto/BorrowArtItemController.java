@@ -59,10 +59,11 @@ public class BorrowArtItemController implements Initializable {
         if(borrow == null)
             BorrowService.createBorrow(artItems,GlobalVars.loggedUser.getUsername());
         else{
+            System.out.println(artItems);
             if(borrow.getStatus().equals(Borrow.pendingStatus))
                 BorrowService.updateBorrow(borrow, artItems);
             else if(borrow.getStatus().equals(Borrow.borrowedStatus))
-                BorrowService.returnBorrowItems(borrow,artItems);
+                BorrowService.returnBorrowItems(borrow,artItems.stream().map(ArtItem::getId).collect(Collectors.toList()));
         }
         this.closeStage(event);
     }
@@ -73,6 +74,7 @@ public class BorrowArtItemController implements Initializable {
         submitButton.setText("Return items");
 
         userCombo.setVisible(false);
+        itemsCombo.setDisable(true);
 
         ObservableList<ComboBoxItemWrap<ArtItem>> values = FXCollections.observableArrayList(
                 ArtItemService.getArtItemsByOwnerName(borrow.getCreator()).

@@ -43,6 +43,9 @@ public class UsersGalleryController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+
+        artItemList = FXCollections.observableArrayList(ArtItemService.getAcceptedArtItems());
+        this.createImageView(0 );
     }
     private void createImageView(int index) {
         tilePane.getChildren().clear();
