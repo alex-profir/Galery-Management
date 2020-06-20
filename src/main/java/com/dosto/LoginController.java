@@ -27,6 +27,7 @@ public class LoginController {
         if(event.getCode().equals(KeyCode.ENTER))
             clickLogIn();
     }
+
     @FXML private void clickLogIn() throws  IOException{
         User formUser = new User(username.getText(),Coder.encode(password.getText()));
         for (User user : users) {
@@ -36,7 +37,6 @@ public class LoginController {
                     App.setRoot("main-menu");
                 }
                 else App.setRoot("user-menu");
-                System.out.println("Login successful");
                 break;
             }else{
                 errorLabel.setText("Invalid password or username");
@@ -44,4 +44,11 @@ public class LoginController {
         }
     }
 
+    public TextField getUsername() {
+        return username;
+    }
+
+    public TextField getPassword() {
+        return password;
+    }
 }
