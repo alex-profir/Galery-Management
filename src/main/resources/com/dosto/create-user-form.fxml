@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;" stylesheets="@Styles/TextFieldCustomStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.CreateUserFormController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;" stylesheets="@Styles/TextFieldCustomStyle.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.CreateUserFormController">
     <JFXTextField fx:id="firstName" focusColor="#4bc565" layoutX="234.0" layoutY="55.0" promptText="First Name" />
     <JFXTextField fx:id="lastName" focusColor="#4bc565" layoutX="234.0" layoutY="88.0" promptText="Last Name" />
     <JFXTextField fx:id="username" focusColor="#4bc565" layoutX="234.0" layoutY="121.0" promptText="Username" />

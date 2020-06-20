@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.MainMenuController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #121212;" stylesheets="@Styles/Main-Menu.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.MainMenuController">
     <JFXTabPane fx:id="tabPane" prefHeight="600.0" prefWidth="900.0" side="LEFT">
         <Tab fx:id="userTab">
             <graphic>
-                <AnchorPane fx:id="userAnchor12" minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
+                <AnchorPane  minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
                     <Label layoutX="-3.0" layoutY="-1.0" prefHeight="26.0" prefWidth="76.0" text="Users" />
                     <FontAwesomeIcon fill="WHITE" iconName="USER" layoutX="-28.0" layoutY="18.0" size="1.5em" text="" textAlignment="JUSTIFY" wrappingWidth="20.199949264526367">
                         <font>
@@ -29,7 +29,7 @@
                 <fx:include source="accept-artitems.fxml" />
             </AnchorPane>
          <graphic>
-             <AnchorPane fx:id="userAnchor1" minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
+             <AnchorPane minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
                  <Label layoutX="-3.0" layoutY="-1.0" prefHeight="26.0" prefWidth="76.0" text="Pending " />
                  <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" layoutX="-31.0" layoutY="17.0" size="1.5em" text="" />
              </AnchorPane>
@@ -37,15 +37,13 @@
         </Tab>
         <Tab fx:id="galleriesTab">
             <graphic>
-                <AnchorPane fx:id="userAnchor11" minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
+                <AnchorPane  minHeight="20.0" minWidth="49.0" prefHeight="20.0" prefWidth="50.0">
                     <Label layoutX="-3.0" layoutY="-1.0" prefHeight="26.0" prefWidth="76.0" text="Galleries" />
                     <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" layoutX="-31.0" layoutY="17.0" size="1.5em" text="" />
                 </AnchorPane>
             </graphic>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="133.0">
-                <children>
-                    <fx:include source="users-gallery.fxml" />
-                </children>
+                <fx:include source="users-gallery.fxml"/>
             </AnchorPane>
         </Tab>
     </JFXTabPane>

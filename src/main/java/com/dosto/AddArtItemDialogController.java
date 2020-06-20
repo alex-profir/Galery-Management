@@ -49,7 +49,7 @@ public class AddArtItemDialogController {
         }
         ArtItem artItem = new ArtItem(name.getText(),artist.getText(),description.getText(),imageString,ArtItem.pendingStatus);
         ArtItemService.addArtItem(artItem);
-        appMainObservableList.add(artItem);
+       // appMainObservableList.add(artItem);
         this.closeStage(event);
     }
     @FXML private void onUploadImage(ActionEvent event) {
@@ -69,7 +69,7 @@ public class AddArtItemDialogController {
             e.printStackTrace();
         }
     }
-    public void setAppMainObservableList(ObservableList<ArtItem> tvObservableList) {
+    void setAppMainObservableList(ObservableList<ArtItem> tvObservableList) {
         this.appMainObservableList = tvObservableList;
     }
 

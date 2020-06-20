@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="397.0" prefWidth="594.0" style="-fx-background-color: #121212;" stylesheets="@Styles/TextFieldCustomStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.AddArtItemDialogController">
+<AnchorPane prefHeight="397.0" prefWidth="594.0" style="-fx-background-color: #121212;" stylesheets="@Styles/TextFieldCustomStyle.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.AddArtItemDialogController">
    <JFXButton layoutX="401.0" layoutY="327.0" onAction="#onUploadImage" prefHeight="43.0" prefWidth="157.0" style="-fx-background-color: #4bc565;" text="Upload Image">
       <font>
          <Font name="System Bold" size="18.0" />

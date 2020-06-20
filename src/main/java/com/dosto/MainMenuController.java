@@ -24,29 +24,24 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tabPane.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener() {
+                new ChangeListener<>() {
                     @Override
-                    public void changed(ObservableValue observableValue, Object oldTab, Object tab) {
-                        Tab newTab = (Tab) tab;
+                    public void changed(ObservableValue<? extends Tab> observableValue, Tab tab, Tab newTab) {
                         if (newTab.getContent() != null) {
                             try {
-//                                System.out.println(newTab.equals((userTab)));
-                                if(newTab.equals(galleriesTab)){
+                                if (newTab.equals(galleriesTab)) {
                                     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(("users-gallery.fxml")));
                                     newTab.setContent(fxmlLoader.load());
-                                } else if(newTab.equals(pendingTab)){
+                                } else if (newTab.equals(pendingTab)) {
                                     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(("accept-artitems.fxml")));
                                     newTab.setContent(fxmlLoader.load());
                                 }
-//                                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(("users" + ".fxml")));
-//                                newTab.setContent(fxmlLoader.load());
                             } catch (IOException e) {
                                 System.out.println(e.toString());
                             }
                         }
                         tabPane.requestLayout();
                     }
-
                 }
         );
     }

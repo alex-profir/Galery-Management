@@ -45,49 +45,7 @@ public class UserListController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
-//        Dialog<User> dialog = new Dialog<>();
-//        dialog.setTitle("Aiurea");
-//        dialog.setHeaderText("This is a custom dialog. Enter info and \n" +
-//                "press Okay (or click title bar 'X' for cancel).");
-//        dialog.setResizable(true);
-//
-//        Label label1 = new Label("Name: ");
-//        Label label2 = new Label("Phone: ");
-//        TextField text1 = new TextField();
-//        TextField text2 = new TextField();
-//
-//        GridPane grid = new GridPane();
-//        grid.add(label1, 1, 1);
-//        grid.add(text1, 2, 1);
-//        grid.add(label2, 1, 2);
-//        grid.add(text2, 2, 2);
-//        dialog.getDialogPane().setContent(grid);
-//
-//        ButtonType buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
-//        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-//
-//        dialog.setResultConverter(new Callback<>() {
-//            @Override
-//            public User call(ButtonType b) {
-//
-//                if (b == buttonTypeOk) {
-//
-//                    return new User(text1.getText(), text2.getText());
-//                }
-//
-//                return null;
-//            }
-//        });
-//
-//        Optional<User> result = dialog.showAndWait();
-//
-//        if (result.isPresent()) {
-//
-//         //   actionStatus.setText("Result: " + result.get());
-//            System.out.println("sal");
-//        }
     }
-
 
     public UserListController(){
         System.out.println("User Constructed");
@@ -101,8 +59,6 @@ public class UserListController implements Initializable {
         firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         userTable.setItems(observableUsers);
-
-
 
     }
 }

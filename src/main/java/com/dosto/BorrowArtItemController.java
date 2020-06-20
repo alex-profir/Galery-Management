@@ -67,13 +67,12 @@ public class BorrowArtItemController implements Initializable {
         this.closeStage(event);
     }
 
-    public void setReturnBorrow(Borrow borrow){
+    void setReturnBorrow(Borrow borrow){
         System.out.println(borrow.getArtItems());
         this.borrow=borrow;
         submitButton.setText("Return items");
 
-        userCombo.setValue(GlobalVars.loggedUser.getUsername());
-        userCombo.setDisable(true);
+        userCombo.setVisible(false);
 
         ObservableList<ComboBoxItemWrap<ArtItem>> values = FXCollections.observableArrayList(
                 ArtItemService.getArtItemsByOwnerName(borrow.getCreator()).
@@ -99,16 +98,14 @@ public class BorrowArtItemController implements Initializable {
      * the only use-case for this is to accept the borrow
      *
      */
-    public void setBorrow(Borrow borrow){
+    void setBorrow(Borrow borrow){
         this.borrow = borrow;
 
         rejectButton.setVisible(true);
         rejectButton.setDisable(false);
         submitButton.setText("Accept");
         // set default user
-        userCombo.setValue(GlobalVars.loggedUser.getUsername());
-        userCombo.setDisable(true);
-
+         userCombo.setVisible(false);
         ObservableList<ComboBoxItemWrap<ArtItem>> values = FXCollections.observableArrayList(
                 ArtItemService.getArtItemsByOwnerName(GlobalVars.loggedUser.getUsername()).
                         stream().filter(artItem -> artItem.getStatus().equals(ArtItem.pendingBorrow)).map(ComboBoxItemWrap::new).collect(Collectors.toList()));
@@ -143,13 +140,10 @@ public class BorrowArtItemController implements Initializable {
         });
 
         itemsCombo.setCellFactory(c -> {
-            ListCell<ComboBoxItemWrap<ArtItem>> cell = new ListCell(){
+            ListCell<ComboBoxItemWrap<ArtItem>> cell = new ListCell<>() {
                 @Override
-                protected void updateItem(Object obj, boolean empty) {
-
-                    super.updateItem(obj, empty);
-                    ComboBoxItemWrap<ArtItem> item = (ComboBoxItemWrap<ArtItem>) obj;
-
+                protected void updateItem(ComboBoxItemWrap<ArtItem> item, boolean empty) {
+                    super.updateItem(item, empty);
                     if (!empty) {
                         VBox box = new VBox();
                         final CheckBox cb = new CheckBox(item.toString());
@@ -159,11 +153,10 @@ public class BorrowArtItemController implements Initializable {
                         imageView.setFitHeight(40);
                         imageView.setFitWidth(40);
                         cb.selectedProperty().bind(item.checkProperty());
-                        box.getChildren().addAll(cb,imageView);
+                        box.getChildren().addAll(cb, imageView);
                         setGraphic(box);
                     }
                 }
-
             };
 
             cell.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {

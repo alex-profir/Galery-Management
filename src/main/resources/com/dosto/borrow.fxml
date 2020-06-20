@@ -6,20 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dosto.BorrowArtItemController">
-   <children>
-      <AnchorPane fx:id="selectCombo" layoutX="383.0" layoutY="55.0" prefHeight="248.0" prefWidth="191.0">
-         <children>
-          <AnchorPane layoutX="7.0" layoutY="31.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ComboBox fx:id="itemsCombo" layoutX="25.0" layoutY="1.0" maxHeight="100.0" prefWidth="150.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <JFXComboBox fx:id="userCombo" layoutX="421.0" layoutY="28.0" prefHeight="26.0" prefWidth="130.0" />
-      <JFXButton fx:id="submitButton" layoutX="81.0" layoutY="303.0" onAction="#onSubmit" style="-fx-background-color: #4bc565;" text="Submit" />
-      <Text fx:id="requestedBy" fill="WHITE" layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.33673095703125" />
-      <JFXButton fx:id="rejectButton" disable="true" layoutX="167.0" layoutY="303.0" onAction="#onReject" style="-fx-background-color: #4bc565;" text="Reject" visible="false" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;"
+            xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dosto.BorrowArtItemController">
+    <AnchorPane fx:id="selectCombo" layoutX="383.0" layoutY="55.0" prefHeight="248.0" prefWidth="191.0">
+        <AnchorPane layoutX="7.0" layoutY="31.0" minHeight="0.0" minWidth="0.0" prefHeight="200.0"
+                    prefWidth="200.0">
+            <ComboBox fx:id="itemsCombo" layoutX="25.0" layoutY="1.0" maxHeight="100.0" prefWidth="150.0"/>
+        </AnchorPane>
+    </AnchorPane>
+    <JFXComboBox fx:id="userCombo" layoutX="421.0" layoutY="28.0" prefHeight="26.0" prefWidth="130.0"/>
+    <JFXButton fx:id="submitButton" layoutX="81.0" layoutY="303.0" onAction="#onSubmit"
+               style="-fx-background-color: #4bc565;" text="Submit"/>
+    <Text fx:id="requestedBy" fill="WHITE" layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          wrappingWidth="81.33673095703125"/>
+    <JFXButton fx:id="rejectButton" disable="true" layoutX="167.0" layoutY="303.0" onAction="#onReject"
+               style="-fx-background-color: #4bc565;" text="Reject" visible="false"/>
 </AnchorPane>

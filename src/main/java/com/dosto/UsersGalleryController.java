@@ -44,7 +44,7 @@ public class UsersGalleryController implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();
     }
-    public void createImageView(int index) {
+    private void createImageView(int index) {
         tilePane.getChildren().clear();
         for (int i = index * pageSize; i < index * pageSize + pageSize; i++) {
             try {
@@ -72,7 +72,7 @@ public class UsersGalleryController implements Initializable {
         }
     }
 
-    public VBox createStuff(int index) {
+    private VBox createStuff(int index) {
         createImageView(index);
         return new VBox();
     }
@@ -84,12 +84,7 @@ public class UsersGalleryController implements Initializable {
             borrowButton.setVisible(false);
         }
         this.createImageView(0);
-        System.out.println(artItemList.size() / 6);
-        if ((artItemList.size() / 6) + 1 > 5) {
-            pagination.setMaxPageIndicatorCount(5);
-        } else {
-            pagination.setMaxPageIndicatorCount(artItemList.size() / 6 + 1);
-        }
+        pagination.setMaxPageIndicatorCount(Math.min((artItemList.size() / 6) + 1, 5));
         pagination.setPageCount(artItemList.size() / 6 + 1);
         pagination.setPageFactory(this::createStuff);
     }
