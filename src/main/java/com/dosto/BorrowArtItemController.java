@@ -58,14 +58,45 @@ public class BorrowArtItemController implements Initializable {
         itemsCombo.getItems().filtered(ComboBoxItemWrap::getCheck).forEach(item -> artItems.add(item.getItem()));
         if(borrow == null)
             BorrowService.createBorrow(artItems,GlobalVars.loggedUser.getUsername());
-        else
-            BorrowService.updateBorrow(borrow, artItems);
+        else{
+            if(borrow.getStatus().equals(Borrow.pendingStatus))
+                BorrowService.updateBorrow(borrow, artItems);
+            else if(borrow.getStatus().equals(Borrow.borrowedStatus))
+                BorrowService.returnBorrowItems(borrow,artItems);
+        }
         this.closeStage(event);
     }
 
+    public void setReturnBorrow(Borrow borrow){
+        System.out.println(borrow.getArtItems());
+        this.borrow=borrow;
+        submitButton.setText("Return items");
+
+        userCombo.setValue(GlobalVars.loggedUser.getUsername());
+        userCombo.setDisable(true);
+
+        ObservableList<ComboBoxItemWrap<ArtItem>> values = FXCollections.observableArrayList(
+                ArtItemService.getArtItemsByOwnerName(borrow.getCreator()).
+                        stream().filter(artItem -> artItem.getStatus().equals(ArtItem.borrowedStatus)).map(ComboBoxItemWrap::new).collect(Collectors.toList()));
+        itemsCombo.setItems(values);
+
+        for (ComboBoxItemWrap<ArtItem> item : itemsCombo.getItems()) {
+            if(borrow.getArtItems().contains(item.getItem().getId())){
+                item.setCheck(true);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        itemsCombo.getItems().filtered(Objects::nonNull).filtered(ComboBoxItemWrap::getCheck).forEach(p -> {
+            sb.append("; ").append(p.getItem());
+        });
+        final String string = sb.toString();
+        itemsCombo.setPromptText(string.substring(Integer.min(2, string.length())));
+    }
     /**
      *
      * @param borrow this will only be used by the logged user , so please be careful with the usage
+     * the only use-case for this is to accept the borrow
      *
      */
     public void setBorrow(Borrow borrow){
@@ -77,6 +108,7 @@ public class BorrowArtItemController implements Initializable {
         // set default user
         userCombo.setValue(GlobalVars.loggedUser.getUsername());
         userCombo.setDisable(true);
+
         ObservableList<ComboBoxItemWrap<ArtItem>> values = FXCollections.observableArrayList(
                 ArtItemService.getArtItemsByOwnerName(GlobalVars.loggedUser.getUsername()).
                         stream().filter(artItem -> artItem.getStatus().equals(ArtItem.pendingBorrow)).map(ComboBoxItemWrap::new).collect(Collectors.toList()));
@@ -88,7 +120,6 @@ public class BorrowArtItemController implements Initializable {
             }
         }
 
-        // set string for combo box
         StringBuilder sb = new StringBuilder();
         itemsCombo.getItems().filtered(Objects::nonNull).filtered(ComboBoxItemWrap::getCheck).forEach(p -> {
             sb.append("; ").append(p.getItem());

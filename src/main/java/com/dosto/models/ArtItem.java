@@ -18,6 +18,7 @@ public class ArtItem {
     private final String artist;
     private final String description;
     private final String owner;
+    private String originalOwner;
     private String encodedImageString;
     private Image image;
     private String status;
@@ -32,6 +33,10 @@ public class ArtItem {
         this.status =status;
         byte[] decodedBytes = Base64.getDecoder().decode(encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
+    }
+
+    public String getOriginalOwner() {
+        return originalOwner;
     }
 
     public void setStatus(String status) {
@@ -65,6 +70,7 @@ public class ArtItem {
         this.encodedImageString =(String)object.get("image");
         this.status =(String) object.get("status") ;
         this.id=(Long) object.get("id");
+        this.originalOwner=(String) object.get("originalOwner");
         byte[] decodedBytes = Base64.getDecoder().decode(this.encodedImageString);
         this.image=new Image(new ByteArrayInputStream(decodedBytes));
     }

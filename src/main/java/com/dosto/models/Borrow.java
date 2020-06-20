@@ -21,12 +21,18 @@ public class Borrow {
 
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public Borrow(String creator, List<Long> artItems) {
         this.creator = creator;
         this.artItems = artItems;
     }
     public Borrow(JSONObject object) {
         this.creator=(String) object.get("creator");
+        this.status=(String) object.get("status");
+
         JSONArray ids = (JSONArray) object.get("artItems");
         for (Object id : ids) {
             Long artItemId = (Long) id;
