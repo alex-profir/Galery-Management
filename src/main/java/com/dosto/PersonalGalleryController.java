@@ -71,15 +71,35 @@ public class PersonalGalleryController implements Initializable {
         artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
         this.createImageView(0);
     }
+    private void onReturn(Borrow borrow) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("borrow.fxml"));
+        Parent parent = fxmlLoader.load();
+        BorrowArtItemController dialogController = fxmlLoader.getController();
+
+        dialogController.setReturnBorrow(borrow);
+
+        Scene scene = new Scene(parent, 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        // refresh page
+        artItemList = FXCollections.observableArrayList(ArtItemService.getLoggedUserArtItems());
+        this.createImageView(0);
+    }
     public void createImageView(int index) {
         tilePane.getChildren().clear();
         for (int i = index * pageSize; i < index * pageSize + pageSize; i++) {
             try {
                 ArtItem artItem = artItemList.get(i);
+                Borrow borrow = BorrowService.getBorrowByArtItem(artItem);
+
                 VBox pane = new VBox();
                 HBox root = new HBox();
                 root.setPadding(new Insets(10, 10, 10, 10));
                 JFXButton review = new JFXButton();
+                JFXButton returnButton = new JFXButton();
                 review.setStyle("-fx-background-color: #121212");
                 Label status = new Label();
                 status.setStyle("-fx-background-color: #4bc565; -fx-text-inner-color: #a9a9a9;");
@@ -87,13 +107,23 @@ public class PersonalGalleryController implements Initializable {
                     status.setText("PENDING");
                 } else  if (artItem.getStatus().equals(ArtItem.borrowedStatus)){
                     status.setText("BORROWED");
+
+                    returnButton.setText("Return Items");
+                    returnButton.setStyle("-fx-background-color: #4bc565");
+                    returnButton.setOnAction(actionEvent -> {
+                        try {
+                            this.onReturn(borrow);
+                        } catch (IOException e) {
+                            System.out.println("error");
+                        }
+                    });
+                    pane.getChildren().add(returnButton);
                 } else if(artItem.getStatus().equals(ArtItem.pendingBorrow)) {
 
 
                     status.setText("THIS ITEM IS REQUESTED");
                     review.setText("Review");
                     review.setStyle("-fx-background-color: #4bc565");
-                    Borrow borrow = BorrowService.getBorrowByArtItem(artItem);
                     review.setOnAction(actionEvent -> {
                         try {
                             this.onReview(actionEvent,borrow);

@@ -13,7 +13,7 @@
             </graphic>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="133.0" />
         </Tab>
-        <Tab>
+        <Tab fx:id="personalGallery">
             <graphic>
                 <FontAwesomeIcon fill="WHITE" iconName="WINDOWS" size="1.5em" />
             </graphic>
@@ -21,7 +21,7 @@
                 <fx:include source="personal-gallery.fxml" />
             </AnchorPane>
         </Tab>
-        <Tab>
+        <Tab fx:id="usersGallery">
             <graphic>
                 <FontAwesomeIcon fill="WHITE" iconName="ARCHIVE" size="1.5em" />
             </graphic>

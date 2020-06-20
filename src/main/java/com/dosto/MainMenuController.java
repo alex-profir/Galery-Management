@@ -27,7 +27,6 @@ public class MainMenuController implements Initializable {
                 new ChangeListener<>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> observableValue, Tab oldTab, Tab newTab) {
-                        System.out.println("Tab changed");
                         if (newTab.getContent() != null) {
                             try {
 //                                System.out.println(newTab.equals((userTab)));
